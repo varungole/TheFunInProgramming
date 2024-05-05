@@ -2,6 +2,8 @@ import java.util.*;
 
 public  class Wordle {
 
+   private static final int WORD_LENGTH = 5;
+   private static final int MAX_STRIKES = 6;
 
     public static int wordPresent(char c, String word, char[] map, boolean[] check) {
         for (int i = 0; i < 5; i++) {
@@ -17,36 +19,36 @@ public  class Wordle {
         System.out.println("Hello and welcome to your daily wordle");
 
         String[] words = {
-                "APPLE", "BANANA", "CHAIR", "DANCE", "EAGLE", "FANCY", "GRAPE", "HATCH", "IGLOO", "JELLY",
+                "APPLE", "BLACK", "CHAIR", "DANCE", "EAGLE", "FANCY", "GRAPE", "HATCH", "IGLOO", "JELLY",
                 "KITTY", "LEMON", "MONEY", "NURSE", "OLIVE", "PIZZA", "QUEEN", "RIVER", "SNAKE", "TRAIN",
                 "UNCLE", "VIVID", "WATCH", "ZEBRA", "ANGEL", "BEACH", "CLOUD", "DREAM", "FUDGE", "GLASS"
         };
 
         Random random = new Random();
-        int upper = 29;
-        int index = random.nextInt(upper);
-        
-        String answer = words[index];
+
+        String answer = words[random.nextInt(words.length)].toUpperCase();
+        ;
         Scanner sc = new Scanner(System.in);
         int flag = 0;
-        int strikes = 6;
+        int strikes = MAX_STRIKES;
 
-        char[] map = new char[5];
-        for(int i = 0 ; i < 5 ; i++)
+        char[] map = new char[WORD_LENGTH];
+        for(int i = 0 ; i < WORD_LENGTH ; i++)
         {
             map[i] = answer.charAt(i);
         }
 
-        boolean[] check = new boolean[5];
+        boolean[] check = new boolean[WORD_LENGTH];
 
         boolean win = false;
-        char[] answer_array = {'_' , '_' , '_' , '_' , '_'};
+        char[] answer_array = new char[WORD_LENGTH];
+        Arrays.fill(answer_array, '_');
 
-        while(flag < 5 && strikes > 0)
+        while(flag < WORD_LENGTH && strikes > 0)
         {
             System.out.println("Please enter your first guess");
             char c = sc.next().toUpperCase().charAt(0);
-            int temp = 5 - flag;
+            int temp = WORD_LENGTH - flag;
             int curr = wordPresent(c, answer, map, check);
             if(curr != -1)
             {
@@ -61,7 +63,7 @@ public  class Wordle {
                 }
                 System.out.println();
                 flag++;
-                if(flag == 5)
+                if(flag == WORD_LENGTH)
                 {
                     win = true;
                 }
