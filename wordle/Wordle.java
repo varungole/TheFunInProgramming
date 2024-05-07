@@ -46,7 +46,7 @@ public  class Wordle {
 
         while(flag < WORD_LENGTH && strikes > 0)
         {
-            System.out.println("Please enter your first guess");
+            System.out.println("Please enter your guess");
             char c = sc.next().toUpperCase().charAt(0);
             int temp = WORD_LENGTH - flag;
             int curr = wordPresent(c, answer, map, check);
